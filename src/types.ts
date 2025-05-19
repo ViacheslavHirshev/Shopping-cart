@@ -1,4 +1,4 @@
-export interface Product
+export interface Item
 {
     category: string;
     description: string;
@@ -10,4 +10,17 @@ export interface Product
         count: number;
     };
     title: string;
+}
+
+export interface CartItem
+{
+    id: number;
+    count: number;
+}
+
+export interface ItemContextType
+{
+    items: Item[];
+    cartItems: CartItem[];
+    addItemInCartById: (itemId: number, count: number) => void;
 }

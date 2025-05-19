@@ -1,20 +1,21 @@
 import { useContext } from "react";
 import ItemCard from "./ItemCard";
-import { ProductContext } from "../App";
+import { ItemContext } from "../context.ts";
 
 function ShopPage()
 {
-    const { products } = useContext(ProductContext);
+    const { items } = useContext(ItemContext);
 
     return (
         <div className="shop-page">
-            {products.map(product =>
+            {items.map(item =>
                 <ItemCard
-                    key={product.id}
-                    title={product.title}
-                    image={product.image}
-                    price={product.price}
-                    rating={product.rating}
+                    id={item.id}
+                    key={item.id}
+                    title={item.title}
+                    image={item.image}
+                    price={item.price}
+                    rating={item.rating}
                 />)}
         </div>
     );

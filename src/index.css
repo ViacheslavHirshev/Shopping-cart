@@ -22,6 +22,8 @@ h1 {
     width: 100vw;
     background-color: white;
     padding: 2rem;
+    position: sticky;
+    top: 0;
 
     display: flex;
     justify-content: space-between;
@@ -36,6 +38,8 @@ h1 {
 
 .shop-page {
     display: grid;
+    max-width: 1440px;
+    margin: 0 auto;
     grid-template: repeat(auto-fit, 350px) / repeat(auto-fit, 250px);
     grid-auto-columns: 250px;
     grid-auto-rows: 350px;
@@ -56,4 +60,48 @@ h1 {
 .item-card img {
     width: 100px;
     height: 100px;
+}
+
+.cart-page {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.cart-page h2 {
+    font-size: 2rem;
+    margin: 0 auto;
+    width: fit-content;
+    margin-top: 2rem;
+}
+
+.cart-items {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.cart-item {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-item img {
+    width: 50px;
+    height: 50px;
+}
+
+.cart-item-price {
+    display: flex;
+    min-width: 8rem;
+    justify-content: space-between;
+}
+
+.cart-item-count {
+    display: flex;
+    justify-content: space-between;
+    min-width: 5rem;
 }

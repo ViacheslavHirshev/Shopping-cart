@@ -1,39 +1,42 @@
 import { useEffect, useState } from "react"
 import NavBar from "./Components/NavBar"
 import { Outlet } from "react-router-dom"
-import { createContext } from "react";
-import { Product } from "./types.ts"
+import { Item, CartItem } from "./types.ts"
 import { getData } from "./utils.ts"
+import { ItemContext } from "./context.ts"
 
-export const ProductContext = createContext({
-  products: [] as Product[],
-});
 
 function App()
 {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   useEffect(() =>
   {
-    const fetchProducts = async () =>
+    const fetchItems = async () =>
     {
-      const data = await getData<Product[]>("https://fakestoreapi.com/products");
-      setProducts(data);
+      const data = await getData<Item[]>("https://fakestoreapi.com/products");
+      setItems(data);
     }
 
-    fetchProducts();
+    fetchItems();
   }, []);
+
+  function addItemInCartById(itemId: number, count: number): void
+  {
+    setCartItems([...cartItems, { id: itemId, count }]);
+  }
 
   return (
     <>
-      <NavBar />
-      <main>
-        <ProductContext.Provider value={{ products }}>
+      <ItemContext.Provider value={{ items, cartItems, addItemInCartById }}>
+        <NavBar />
+        <main>
           <Outlet />
-        </ProductContext.Provider>
-      </main>
+        </main>
+      </ItemContext.Provider>
     </>
-  )
+  );
 }
 
 export default App
