@@ -1,7 +1,23 @@
 import { useContext } from "react";
 import { ItemContext } from "../context.ts";
 
-function CartPage()
+export default function CartPage()
+{
+    const { cartItems } = useContext(ItemContext);
+
+    return (
+        cartItems.length === 0
+            ? <h2>Your cart is empty</h2>
+            : (
+                <div className="cart-page">
+                    <Items />
+                    <TotalPrice />
+                </div>
+            )
+    );
+}
+
+function Items()
 {
     const { items, cartItems, handleCountIncrement, handleCountDecrement } = useContext(ItemContext);
 
@@ -38,28 +54,8 @@ function CartPage()
         return (price * count).toFixed(2);
     }
 
-    function calculateTotalPrice(): string
-    {
-        let totalPrice = 0;
-
-        if (cartItems.length === 0)
-            return "0.00$";
-
-        for (const cartItem of cartItems)
-        {
-            const item = items.find(item => item.id === cartItem.id);
-
-            if (item)
-            {
-                totalPrice += item.price * cartItem.count;
-            }
-        }
-
-        return totalPrice.toFixed(2) + "$";
-    }
-
     return (
-        <div className="cart-page">
+        <>
             <h2>Your order</h2>
             <div className="cart-items">
                 {
@@ -95,11 +91,37 @@ function CartPage()
                     })
                 }
             </div>
-            <div className="cart-total">
-                <h2>Total: {calculateTotalPrice()}</h2>
-            </div>
-        </div>
+        </>
     );
 }
 
-export default CartPage;
+function TotalPrice()
+{
+    const { items, cartItems } = useContext(ItemContext);
+
+    function calculateTotalPrice(): string
+    {
+        let totalPrice = 0;
+
+        if (cartItems.length === 0)
+            return "0.00$";
+
+        for (const cartItem of cartItems)
+        {
+            const item = items.find(item => item.id === cartItem.id);
+
+            if (item)
+            {
+                totalPrice += item.price * cartItem.count;
+            }
+        }
+
+        return totalPrice.toFixed(2) + "$";
+    }
+
+    return (
+        <div className="cart-total">
+            <h2>Total: {calculateTotalPrice()}</h2>
+        </div>
+    );
+}

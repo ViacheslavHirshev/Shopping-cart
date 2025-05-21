@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { ItemContext } from "../context.ts";
 import StarRating from "./StarRating.tsx";
-import { toast } from "react-toastify";
 
 interface ItemCardProps
 {
@@ -23,15 +22,6 @@ function ItemCard({ id, title, image, price, rating }: ItemCardProps)
     function handleAddToCart(): void
     {
         addItemInCartById(id, itemCount);
-        toast.success("Item added to cart", {
-            position: "bottom-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-        });
     }
 
     function handleIncrement(): void
