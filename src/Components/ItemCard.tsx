@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { ItemContext } from "../context.ts";
+import StarRating from "./StarRating.tsx";
+import { toast } from "react-toastify";
 
 interface ItemCardProps
 {
@@ -18,12 +20,21 @@ function ItemCard({ id, title, image, price, rating }: ItemCardProps)
     const { addItemInCartById } = useContext(ItemContext);
     const [itemCount, setItemCount] = useState(1);
 
-    function handleAddToCart()
+    function handleAddToCart(): void
     {
         addItemInCartById(id, itemCount);
+        toast.success("Item added to cart", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+        });
     }
 
-    function handleIncrement()
+    function handleIncrement(): void
     {
         if (itemCount < 10)
         {
@@ -31,7 +42,7 @@ function ItemCard({ id, title, image, price, rating }: ItemCardProps)
         }
     }
 
-    function handleDecrement()
+    function handleDecrement(): void
     {
         if (itemCount > 1)
         {
@@ -42,13 +53,13 @@ function ItemCard({ id, title, image, price, rating }: ItemCardProps)
     return (
         <div className="item-card">
             <img src={image} alt="Item" />
-            <h2>{title}</h2>
-            <p>Price: {price} $</p>
-            <p>Rating: {rating.rate}</p>
-            <div>
-                <button onClick={handleDecrement}>-</button>
+            <h3>{title}</h3>
+            <p>{price}$</p>
+            <div><StarRating rating={rating.rate} /></div>
+            <div className="item-card-count">
+                <span onClick={handleDecrement}>-</span>
                 {itemCount}
-                <button onClick={handleIncrement}>+</button>
+                <span onClick={handleIncrement}>+</span>
             </div>
             <button onClick={handleAddToCart}>Add to Cart</button>
         </div>

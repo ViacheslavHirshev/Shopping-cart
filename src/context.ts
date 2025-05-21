@@ -5,6 +5,8 @@ export const ItemContext = createContext<ItemContextType>(
     {
         items: [],
         cartItems: [],
+        handleCountIncrement: () => { },
+        handleCountDecrement: () => { },
         addItemInCartById: () => { },
     }
 );

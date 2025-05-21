@@ -22,5 +22,7 @@ export interface ItemContextType
 {
     items: Item[];
     cartItems: CartItem[];
+    handleCountIncrement: (id: number) => void;
+    handleCountDecrement: (id: number) => void;
     addItemInCartById: (itemId: number, count: number) => void;
 }

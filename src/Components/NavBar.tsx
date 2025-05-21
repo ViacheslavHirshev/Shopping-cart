@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { ItemContext } from "../context.ts";
 import { useContext } from "react";
 
@@ -10,11 +10,11 @@ function NavBar()
     return (
         <nav className="navbar">
             <h1>MockShop</h1>
-            <div className="links">
-                <div><Link to="home">Home</Link></div>
-                <div><Link to="shop">Shop</Link></div>
-            </div>
-            <div><Link to="cart">Cart {cartCount}</Link></div>
+            <ul>
+                <li ><NavLink to="home" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink></li>
+                <li><NavLink to="shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink></li>
+            </ul>
+            <div><NavLink to="cart" className={({ isActive }) => isActive ? "active" : ""}>🛒 - {cartCount}</NavLink></div>
         </nav>
     );
 }
