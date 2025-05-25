@@ -19,7 +19,7 @@ export default function CartPage()
 
 function Items()
 {
-    const { items, cartItems, handleCountIncrement, handleCountDecrement } = useContext(ItemContext);
+    const { items, cartItems, handleCountIncrement, handleCountDecrement, deleteItemFromCartById } = useContext(ItemContext);
 
     function increaseCartItemCount(id: number): void
     {
@@ -54,6 +54,11 @@ function Items()
         return (price * count).toFixed(2);
     }
 
+    function handleRemoveItem(id: number): void
+    {
+        deleteItemFromCartById(id);
+    }
+
     return (
         <>
             <h2>Your order</h2>
@@ -83,7 +88,7 @@ function Items()
                                         +
                                     </span>
                                 </span>
-                                <span className="remove-icon">
+                                <span className="remove-icon" onClick={() => handleRemoveItem(item.id)}>
                                     🗑️
                                 </span>
                             </div>

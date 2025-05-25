@@ -75,12 +75,18 @@ function App()
     ))
   }
 
+  function deleteItemFromCartById(id: number): void
+  {
+    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+    utils.displaySuccessToast("Item removed from cart");
+  }
+
   if (loading) return <h1>Loading...</h1>;
   if (error) return <h2>{error}</h2>;
 
   return (
     <>
-      <ItemContext.Provider value={{ items, cartItems, handleCountIncrement, handleCountDecrement, addItemInCartById }}>
+      <ItemContext.Provider value={{ items, cartItems, handleCountIncrement, handleCountDecrement, addItemInCartById, deleteItemFromCartById }}>
         <NavBar />
         <main>
           <Outlet />

@@ -25,4 +25,5 @@ export interface ItemContextType
     handleCountIncrement: (id: number) => void;
     handleCountDecrement: (id: number) => void;
     addItemInCartById: (itemId: number, count: number) => void;
+    deleteItemFromCartById: (id: number) => void;
 }

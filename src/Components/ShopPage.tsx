@@ -2,7 +2,7 @@ import { useContext } from "react";
 import ItemCard from "./ItemCard";
 import { ItemContext } from "../context.ts";
 
-function ShopPage()
+export default function ShopPage()
 {
     const { items } = useContext(ItemContext);
 
@@ -33,5 +33,3 @@ function ShopPage()
         </>
     );
 }
-
-export default ShopPage;
